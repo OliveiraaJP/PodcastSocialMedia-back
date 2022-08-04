@@ -1,21 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import {
-  AppError,
-  errorTypeToStatusCode,
-  isAppError,
-} from "../utils/errorUtils.js";
+import { AppError } from "../utils/error.js";
+import { chalkLogger } from "../utils/chalkLogger.js";
 
-export function errorHandlerMiddleware(
-  err: Error | AppError,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  console.log(err);
-
-  if (isAppError(err)) {
-    return res.status(errorTypeToStatusCode(err.type)).send(err.message);
-  }
-
-  return res.sendStatus(500);
-}
+export function errorHandlerMiddleware(error: any, req: Request, res: Response, next: NextFunction) {
+    if (error instanceof AppError) {
+		chalkLogger.log('error', error.message);
+		return res.status(error.statusCode).send({ message: error.message, status: 'error' });
+	}
+	else {
+		chalkLogger.logObject('error', error);
+		return res.status(500).send({message: 'Internal server error', status: 'error'});
+	}
+} 
