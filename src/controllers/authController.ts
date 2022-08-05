@@ -4,6 +4,7 @@ import { chalkLogger } from "../utils/chalkLogger.js";
 import * as authService from "../services/authService.js"
 
 export async function signup(req: Request, res:Response) {
+    console.log(req.body)
     const {email, password, username, image} : UserData = req.body 
     const userObj = {email, password, username, image}
     await authService.signup(userObj)
@@ -12,6 +13,7 @@ export async function signup(req: Request, res:Response) {
 }
 
 export async function signin(req: Request, res:Response) {
+    console.log(req.body)
     const {email, password}: UserDataSignin = req.body
     const userObj = {email, password}
     const token = await authService.signin(userObj)
