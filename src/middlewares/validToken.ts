@@ -7,8 +7,8 @@ export async function tokenValidator(req: Request, res: Response, next: NextFunc
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearer ", "");
     const decoded: any = jwt.verify(token, process.env.JWT_SECRET);
-    chalkLogger.logObject('middleware', decoded.jwtId)
-    res.locals.userId = decoded.jwtId
+    chalkLogger.logObject('middleware', decoded.jwtId);
+    res.locals.userId = decoded.jwtId;
     next();
 }
 

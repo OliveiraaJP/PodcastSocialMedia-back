@@ -28,14 +28,18 @@ const signin = async (userObj: UserDataSignin) => {
     if(!activeUser) {
         throw new AppError(401, 'Invalid email!')
     }
+
     const confirmPassword = bcrypt.compareSync(password, activeUser.password)
     if(!confirmPassword){
         throw new AppError(401, 'Invalid password!')
     }
+
+    const {username, image} = await authRepository.getEmail(email)
+
     const [jwtUser, jwtId] = [activeUser.email, activeUser.id]
     const token = jwt.sign({jwtUser, jwtId}, process.env.JWT_SECRET, {expiresIn:'24h'})
     chalkLogger.log('service', token)
-    return token
+    return {token, username, image }
 }
 
 export {

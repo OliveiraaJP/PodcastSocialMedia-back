@@ -11,11 +11,71 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  username String @unique
-  password String
-  image    String
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
+  username     String        @unique
+  password     String
+  image        String
+  role         Role          @default(USER)
+  createdAt    DateTime      @default(now())
+  Comments     Comment[]
+  Commentlikes Commentlike[]
+  PodcastLike  PodcastLike[]
 
   @@map("users")
+}
+
+model Podcast {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  episodes     Int
+  finished     Boolean
+  image        String
+  beginAt      String
+  createdAt    DateTime      @default(now())
+  Comments     Comment[]
+  PodcastLikes PodcastLike[]
+
+  @@map("podcasts")
+}
+
+model Comment {
+  id        Int    @id @default(autoincrement())
+  text      String
+  podcastId Int
+  userId    Int
+
+  podcastRef Podcast @relation(fields: [podcastId], references: [id])
+  userRef    User    @relation(fields: [userId], references: [id])
+
+  Commentlikes Commentlike[]
+
+  @@map("comments")
+}
+
+model Commentlike {
+  id        Int @id @default(autoincrement())
+  userId    Int
+  commentId Int
+
+  userRef    User    @relation(fields: [userId], references: [id])
+  commentRef Comment @relation(fields: [commentId], references: [id])
+
+  @@map("comments_likes")
+}
+
+model PodcastLike {
+  id        Int @id @default(autoincrement())
+  userId    Int
+  podcastId Int
+
+  userRef    User    @relation(fields: [userId], references: [id])
+  podcastRef Podcast @relation(fields: [podcastId], references: [id])
+
+  @@map("podcasts_likes")
+}
+
+enum Role {
+  USER
+  ADMIN
 }

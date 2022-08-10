@@ -12,7 +12,7 @@ export async function signup(req: Request, res:Response) {
     res.status(201).send('Registered User" :D')
 }
 
-export async function signin(req: Request, res:Response) {
+export async function signin(req: Request, res:Response) { 
     console.log(req.body)
     const {email, password}: UserDataSignin = req.body
     const userObj = {email, password}
