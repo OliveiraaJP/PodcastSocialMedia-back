@@ -31,3 +31,14 @@ export async function getFavoritePodcasts(req: Request, res: Response) {
     const allFavoritePod =  await podcastService.geFavoritePodcasts(id)
     res.status(202).send(allFavoritePod)
 }
+
+export async function postFavoritePodcast(req: Request, res: Response) {
+    const {userId} = res.locals
+    const {id} = req.params
+    const podcastId = Number(id)
+    
+    await podcastService.hasUser(Number(userId))
+    await podcastService.hasPodcast(podcastId)
+    await podcastService.handleFavoritePodcast(Number(userId), podcastId)
+    res.status(202).send('un/favorited')
+}
