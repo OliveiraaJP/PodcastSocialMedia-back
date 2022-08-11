@@ -32,7 +32,9 @@ model Podcast {
   finished     Boolean
   image        String
   beginAt      String
+  description  String
   createdAt    DateTime      @default(now())
+  updateAt     DateTime      @default(now())
   Comments     Comment[]
   PodcastLikes PodcastLike[]
 
@@ -61,6 +63,7 @@ model Commentlike {
   userRef    User    @relation(fields: [userId], references: [id])
   commentRef Comment @relation(fields: [commentId], references: [id])
 
+  @@unique([userId, commentId])
   @@map("comments_likes")
 }
 
@@ -72,6 +75,7 @@ model PodcastLike {
   userRef    User    @relation(fields: [userId], references: [id])
   podcastRef Podcast @relation(fields: [podcastId], references: [id])
 
+  @@unique([userId, podcastId])
   @@map("podcasts_likes")
 }
 

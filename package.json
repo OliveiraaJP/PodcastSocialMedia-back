@@ -7,7 +7,13 @@
   "scripts": {
     "start": "node dist/server.js",
     "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "prisma": "prisma migrate dev",
+    "studio": "prisma studio",
+    "prisma:seed": "prisma db seed"
+  },
+  "prisma":{
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",
