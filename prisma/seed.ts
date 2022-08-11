@@ -3,13 +3,19 @@ import bcrypt from "bcrypt"
 
 const cryptpass = bcrypt.hashSync('123', 10)
 
-const user =
-{
-    email: "carol@email.com",
-    username: "Carolinda Hazzan",
-    password: cryptpass,
-    image: "https://i.imgur.com/5JS4bOL.png"
-}
+const user = [
+    {
+        email: "carol@email.com",
+        username: "Carolinda Hazzan",
+        password: cryptpass,
+        image: "https://i.imgur.com/5JS4bOL.png"
+    },
+    {
+        email: "admin@admin.com",
+        username: "Adminstrador",
+        password: cryptpass,
+        image: "https://i.imgur.com/5JS4bOL.png"
+    }]
 
 const podcasts = [
     {
@@ -46,23 +52,23 @@ const podcasts = [
     }
 ]
 
-const podcast_like =[
+const podcast_like = [
     {
-        userId:1,
-        podcastId:4
+        userId: 1,
+        podcastId: 4
     },
     {
-        userId:1,
-        podcastId:2
+        userId: 1,
+        podcastId: 2
     }
 ]
 
 
 async function main() {
     await prisma.$connect()
-    await prisma.user.create({ data: user })
-    await prisma.podcast.createMany({data: podcasts})
-    await prisma.podcastLike.createMany({data: podcast_like})
+    await prisma.user.createMany({ data: user })
+    await prisma.podcast.createMany({ data: podcasts })
+    await prisma.podcastLike.createMany({ data: podcast_like })
 }
 
 main()

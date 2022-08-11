@@ -24,3 +24,10 @@ export async function getOnePodcast(req: Request, res: Response) {
     chalkLogger.logObject('controller', onePod)
     res.status(202).send(onePod)
 }
+
+export async function getFavoritePodcasts(req: Request, res: Response) {
+    const {userId} = res.locals
+    const id = Number(userId)
+    const allFavoritePod =  await podcastService.geFavoritePodcasts(id)
+    res.status(202).send(allFavoritePod)
+}

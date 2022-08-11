@@ -19,3 +19,7 @@ export async function getAllPodcasts() {
 export async function getOnePodcast(id: number) {
     return await podcastRepository.getOnePodcast(id)
 }
+
+export async function geFavoritePodcasts(userId: number) {
+    return await podcastRepository.getFavoritePodcasts(userId)
+}

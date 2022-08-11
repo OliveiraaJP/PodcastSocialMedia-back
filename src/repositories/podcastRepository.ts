@@ -18,3 +18,14 @@ export async function getAllPodcasts() {
 export async function getOnePodcast(id: number) {
     return await prisma.podcast.findFirst({where:{id}})
 }
+
+export async function getFavoritePodcasts(userId:number) {
+    return await prisma.podcastLike.findMany({
+        where:{
+            userId
+        },
+        select: {
+            podcastRef: {}
+        }
+    })
+}
