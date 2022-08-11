@@ -15,3 +15,7 @@ export async function insert(podcastObj: PodcastData) {
 export async function getAllPodcasts() {
     return await podcastRepository.getAllPodcasts()
 }
+
+export async function getOnePodcast(id: number) {
+    return await podcastRepository.getOnePodcast(id)
+}

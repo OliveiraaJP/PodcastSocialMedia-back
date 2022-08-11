@@ -14,3 +14,7 @@ export async function insertPodcast(podcastData: PodcastData) {
 export async function getAllPodcasts() {
     return await prisma.podcast.findMany({})
 }
+
+export async function getOnePodcast(id: number) {
+    return await prisma.podcast.findFirst({where:{id}})
+}
