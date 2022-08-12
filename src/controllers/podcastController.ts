@@ -19,8 +19,10 @@ export async function getAllPodcasts(req: Request, res: Response) {
 
 export async function getOnePodcast(req: Request, res: Response) {
     const {id} = req.params
+    const {userId} = res.locals
+    const userNumId = Number(userId)
     const podcastId = Number(id)
-    const onePod =  await podcastService.getOnePodcast(podcastId)
+    const onePod =  await podcastService.getOnePodcast(podcastId, userNumId)
     chalkLogger.logObject('controller', onePod)
     res.status(202).send(onePod)
 }

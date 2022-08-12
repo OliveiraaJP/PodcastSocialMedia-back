@@ -30,8 +30,8 @@ export async function getAllPodcasts() {
     return await podcastRepository.getAllPodcasts()
 }
 
-export async function getOnePodcast(id: number) {
-    return await podcastRepository.getOnePodcast(id)
+export async function getOnePodcast(id: number, userId: number) {
+    return await podcastRepository.getOnePodcast(id, userId)
 }
 
 export async function geFavoritePodcasts(userId: number) {
