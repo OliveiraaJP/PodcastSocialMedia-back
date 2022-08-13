@@ -27,6 +27,7 @@ export async function getOnePodcast(id: number, userId: number) {
     return await prisma.podcast.findFirst({
         where: { id },
         include: { PodcastLikes: { where: { AND: [{ podcastId: id }, { userId }] } } },
+        orderBy:{updateAt: 'desc'}
     });
 }
 
