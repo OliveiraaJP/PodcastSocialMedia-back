@@ -20,7 +20,7 @@ export async function insertPodcast(podcastData: PodcastData) {
 }
 
 export async function getAllPodcasts() {
-    return await prisma.podcast.findMany({});
+    return await prisma.podcast.findMany({orderBy:{updateAt:'desc'}});
 }
 
 export async function getOnePodcast(id: number, userId: number) {
