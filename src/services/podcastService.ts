@@ -4,14 +4,14 @@ import { AppError } from "../utils/error.js";
 import { chalkLogger } from "../utils/chalkLogger.js";
 
 export async function hasUser(id:number) {
-    const hasUser = podcastRepository.getUser(id)
+    const hasUser = await podcastRepository.getUser(id)
     if(!hasUser){
         throw new AppError(404, 'User not found')
     }
 }
 
 export async function hasPodcast(id:number) {
-    const hasPodcast = podcastRepository.getPodcast(id)
+    const hasPodcast = await podcastRepository.getPodcast(id)
     if(!hasPodcast){
         throw new AppError(404, 'Podcast not found')
     }
