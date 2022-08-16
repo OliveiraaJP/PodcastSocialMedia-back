@@ -27,8 +27,21 @@ export async function getOnePodcast(id: number, userId: number) {
     return await prisma.podcast.findFirst({
         where: { id },
         include: {
-            PodcastLikes: { where: { AND: [{ podcastId: id }, { userId }] } },
-            Comments: { where: { podcastId: id } }
+            PodcastLikes: {
+                where: { AND: [{ podcastId: id }, { userId }] }
+            },
+            Comments: {
+                where: { podcastId: id },
+                include: {
+                    userRef: {
+                        select:
+                        {
+                            image: true,
+                            username: true
+                        }
+                    }
+                }
+            }
         },
 
     });
