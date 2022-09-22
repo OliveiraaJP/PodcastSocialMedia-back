@@ -33,7 +33,7 @@
 <h3>Clone the repository:</h3>
 
 ```
-$ git clone https://github.com/OliveiraaJP/PodcastSocialMedia-front.git
+$ git clone https://github.com/OliveiraaJP/PodcastSocialMedia-back.git
 ```
 
 <h3>Install dependencies:</h3>
@@ -45,5 +45,5 @@ $ npm or yarn install
 <h3>Initializing the API:</h3>
 
 ```
-$ npm start
+$ npm run dev
 ```
