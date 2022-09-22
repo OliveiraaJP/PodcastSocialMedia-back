@@ -8,10 +8,5 @@
     },
     "ts-node": {
       "esm": true,
-    },
-    "exclude": [
-      "src/tests.podcastService.test.ts",
-      "src/tests/integration/app.test.ts",
-      "src/tests/factories/podcsatFactory.ts"
-    ]
+    }
   } 
