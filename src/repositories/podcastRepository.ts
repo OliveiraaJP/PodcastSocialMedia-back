@@ -20,14 +20,30 @@ export async function insertPodcast(podcastData: PodcastData) {
 }
 
 export async function getAllPodcasts() {
-    return await prisma.podcast.findMany({orderBy:{updateAt:'desc'}});
+    return await prisma.podcast.findMany({ orderBy: { updateAt: 'desc' } });
 }
 
 export async function getOnePodcast(id: number, userId: number) {
     return await prisma.podcast.findFirst({
         where: { id },
-        include: { PodcastLikes: { where: { AND: [{ podcastId: id }, { userId }] } } },
-        orderBy:{updateAt: 'desc'}
+        include: {
+            PodcastLikes: {
+                where: { AND: [{ podcastId: id }, { userId }] }
+            },
+            Comments: {
+                where: { podcastId: id },
+                include: {
+                    userRef: {
+                        select:
+                        {
+                            image: true,
+                            username: true
+                        }
+                    }
+                }
+            }
+        },
+
     });
 }
 
